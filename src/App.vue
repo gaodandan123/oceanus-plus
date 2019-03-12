@@ -7,7 +7,33 @@
     <router-view/>
   </div>
 </template>
+<script>
+// import '@/globalStyle/global.less'
+import { mapMutations } from 'vuex'
 
+export default {
+  methods: {
+
+  },
+  created () {
+    // 删除loading动画
+    document.body.removeChild(document.getElementById('appLoading'))
+    document.body.style.backgroundColor = '#fff'
+    setTimeout(() => {
+      document.getElementById('app').style.display = 'block'
+    }, 500)
+    // 监听窗口大小变化
+    window.onresize = () => {
+      this.updateState({
+        windowHeight: document.documentElement.clientHeight
+      })
+    }
+  },
+  computed: {
+    ...mapMutations(['updateState'])
+  }
+}
+</script>
 <style lang="less">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
